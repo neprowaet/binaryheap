@@ -1,4 +1,11 @@
 var speed=25;
+var paused = true;
+function sleep(){
+		  if(!paused) return;
+		  else setTimeout(function(){ sleep(); }, 200);
+	  }
+
+
 function setSpeed(a){
 	speed = 50 - a;
 }
@@ -36,6 +43,7 @@ var binaryHeap = function(comp) {
     }
     var parent = Math.floor((pos - 1) / 2);
     if (comp(vertexArray[pos], vertexArray[parent])) {
+		
       swap(pos, parent);
       bubbleUp(parent);
     }
@@ -48,6 +56,7 @@ var binaryHeap = function(comp) {
 		setTimeout(function(){log('reached source of heap - element ' + vertexArray[pos].v + ' inserted' );}, 200);
 		document.getElementById("reset").disabled = false;
 		document.getElementById("send").disabled = false;
+		paused = false;
         return;
     }
     var parent = Math.floor((pos - 1) / 2);
@@ -63,6 +72,7 @@ var binaryHeap = function(comp) {
 		setTimeout(function(){log(vertexArray[pos].v + ' < ' + vertexArray[parent].v + ' - element ' + vertexArray[pos].v + ' inserted' );}, 200);
 		document.getElementById("reset").disabled = false;
 		document.getElementById("send").disabled = false;
+		paused = false;
 	}
   };
 
@@ -78,6 +88,9 @@ var binaryHeap = function(comp) {
 	vertexArray[vertexArray.length-1].selected = true;
 	drawHeap();
     bubbleUpV(vertexArray.length - 1);
+	
+	paused = true;
+	console.log('URAAAAAAAAAAA');
   };
 
 
@@ -113,23 +126,14 @@ console.log(vertexArray) // 2
 
 var c;var can; var path=[];
 
-$( document ).ready(function() {
 
-	//vertexArray[0].selected = true;
-	//vertexArray[1].selected = true;
-	
-	
-	
-  
-	//drawAnimatedLine(0,0,100,100);
-	//drawAnimatedLine(100,0,500,100);
-	
-	//drawSwappingVertexies(0,1);
-    
-});
 var counter;
 function insert(){
-	var val = document.getElementById("in").value;
+	var val = parseInt(document.getElementById("in").value);
+	if(isNaN(val)) {
+		alert('Oops, invalid value');
+			return;
+	}
 	counter = 1;
 	for(var i=0;i<vertexArray.length;i++){
 		vertexArray[i].selected = false;
@@ -138,6 +142,7 @@ function insert(){
 			return;
 		}
 	}
+	
 	if(vertexArray.length != 0) {
 	document.getElementById("reset").disabled = true;
 	document.getElementById("send").disabled = true;

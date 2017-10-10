@@ -1,0 +1,45 @@
+function animationsTest (callback) {
+    // Test if ANY/ALL page animations are currently active
+
+    var testAnimationInterval = setInterval(function () {
+        if (! $.timers.length) { // any page animations finished
+            clearInterval(testAnimationInterval);
+            callback();
+        }
+    }, 25);
+}
+function drawAnimatedLine(ax,ay,bx,by){
+    var waypoints=[];
+    var dx=bx-ax;
+    var dy=by-ay;
+    for(var j=0;j<100;j++){
+        var x=ax+dx*j/100;
+        var y=ay+dy*j/100;
+        waypoints.push({x:x,y:y});
+    }
+	
+	var t = 0;
+	var timer = setInterval(function() {
+	if (t == waypoints.length-1) {clearInterval(timer); console.log('STOPED');}
+	t++;
+	c.beginPath();
+    c.moveTo(waypoints[t-1].x,waypoints[t-1].y);
+    if(t < waypoints.length) c.lineTo(waypoints[t].x,waypoints[t].y);
+	c.strokeStyle = "orange";
+    c.stroke();
+	}, 20);
+	
+}
+
+
+function testa(){
+  
+  drawAnimatedLine(0,0,100,100);
+
+animationsTest(function () {alert('done'); })
+               
+}
+  
+  
+  
+
