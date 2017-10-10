@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Binary Heap</title>
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		 <link rel="stylesheet" href="style.css">
+		 <script src="binheap.js"></script>
+		 <script src="visualization.js"></script>
+		<meta charset='utf-8' />
+	</head>
+	<body>
+		<table><tr><td width=500><h1>BinaryHeap Visualization</h1>
+        <p class="lead">This page demonstrates inserting new element in<br>binary heap for maximum.</p>
+		</td>
+		<td>
+		<textarea id="log"></textarea>
+		</td>
+		</tr></table>
+        <canvas id="can" width=890 height=300></canvas>
+		<br>
+		<div style="margin-left:320px;">
+		<button style="height:24px;" id="reset" onclick="reset();"> Reset </button> 
+		<input id="in" type="text" placeholder="Value"> 
+		<button style="height:24px;" id="send" onClick="insert();">Insert</button>
+		<input type="range" min="10" max="40" step="5" onchange="setSpeed(this.value)">
+          <datalist id="speeds">
+              <option value="10">
+              <option value="15">
+              <option value="20">
+              <option value="25">
+              <option value="30">
+              <option value="35">
+			  <option value="40">
+          </datalist>
+		</div>
+		<script>	
+		can = document.getElementById('can');
+		c = can.getContext('2d');
+		drawHeap();</script>
+	</body>
+</html>
